@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,37 @@
     <title>Reviews</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <main>
+        <section class="container">
+            <header class="title">
+                <h2>our reviews</h2>
+                <div class="underline"></div>
+            </header>
+            <article class="review">
+                <div class="img-container">
+                    <img src="./person-1.jpeg" id="person-img" alt="">
+                </div>
+                <h4 id="author">Sara Jones</h4>
+                <p id="job">UX Designer</p>
+                <p id="info">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum dolores fuga tempore eius
+                    qui, possimus odit nulla repellendus nesciunt architecto similique voluptatem consequuntur incidunt
+                    obcaecati assumenda, consectetur delectus officia facere laudantium ad neque eaque.
+                </p>
+                <!-- prev next buttons -->
+                <div class="button-container">
+                    <button class="prev-btn"><i class="fas fa-chevron-left">poprzednie</i></button>
+                    <button class="prev-btn"><i class="fas fa-chevron-right">następne</i></i></button>
+                </div>
+                <button class="random-btn">
+                    zaskocz mnie
+                </button>
+            </article>
+        </section>
+    </main>
+
     <script src="app.js"></script>
 </body>
+
 </html>
