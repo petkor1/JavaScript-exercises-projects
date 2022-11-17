@@ -14,7 +14,11 @@ let editId = '';
 
 // ****** EVENT LISTENERS **********
 // submit form
-form.addEventListener('submit', addItem)
+form.addEventListener('submit', addItem);
+// clear items
+clearBtn.addEventListener('click', clearItems)
+
+
 
 // ****** FUNCTIONS **********
 function addItem(e) {
@@ -35,18 +39,70 @@ function addItem(e) {
             <button type="button" class="edit-btn"><i class="fas fa-edit"></i></button>
             <button type="button" class="delete-btn"><i class="fas fa-trash"></i></button>
         </div>`
+        const deleteBtn = element.querySelector('.delete-btn');
+        const editBtn = element.querySelector('.edit-btn');
+        deleteBtn.addEventListener('click', deleteItem);
+        editBtn.addEventListener('click', editItem);
         // append child 
         list.appendChild(element);
         // display alert
         displayAlert('item add to the list', 'success');
         // show container
         container.classList.add('show-container');
+        // add to local storage
+        addToLocalStorage(id, value);
+        // set back to default
+        setBackToDefault();
     } else if (value && editFlag) {
+        editElement.innerHTML = value;
+        displayAlert('value changed', 'success');
+        // edit local storage
+        editLocalStorage(editId, value);
+        setBackToDefault();
     } else {
         displayAlert('please enter value', 'danger')
     }
 }
 
+function clearItems() {
+    let items = document.querySelectorAll('.grocery-item');
+    if (items.length) {
+        items.forEach(function (item) {
+            list.removeChild(item);
+        })
+    }
+    container.classList.remove('show-container');
+    displayAlert('empty list', 'danger');
+    setBackToDefault();
+    // localStorage.removeItem('list')
+}
+
+// delete function
+function deleteItem(e) {
+    const element = e.currentTarget.parentElement.parentElement;
+    const id = element.dataset.id;
+    list.removeChild(element);
+    if (!list.length) {
+        container.classList.remove('show-container');
+    }
+    displayAlert('item removed', 'danger');
+    setBackToDefault();
+    // remove from local storage
+    // removeFromLocalStorage(id);
+}
+
+// edit function
+function editItem(e) {
+    const element = e.currentTarget.parentElement.parentElement;
+    // set edit item
+    editElement = e.currentTarget.parentElement.previousElementSibling;
+    // set form value
+    grocery.value = editElement.innerHTML;
+    editFlag = true;
+    editId = element.dataset.id;
+    submitBtn.textContent = 'edit';
+
+}
 
 // display alert
 function displayAlert(text, action) {
@@ -60,6 +116,31 @@ function displayAlert(text, action) {
     }, 2000)
 
 }
-// ****** LOCAL STORAGE **********
 
+// set back to default
+function setBackToDefault() {
+    grocery.value = '';
+    editFlag = false;
+    editId = '';
+    submitBtn.textContent = 'submit';
+}
+
+// ****** LOCAL STORAGE **********
+function addToLocalStorage() {
+}
+
+function removeFromLocalStorage(id) {
+
+}
+
+function editLocalStorage(id, value) {
+
+}
+
+// localStorage api
+// setItem
+// getItem
+// removeItem
+// save as strings
+localStorage.setItem()
 // ****** SETUP ITEMS **********
