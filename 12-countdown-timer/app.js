@@ -36,19 +36,14 @@ const futureDate = new Date(tempYear, tempMonth, tempDay + 10, 10, 4, 0);
 
 const year = futureDate.getFullYear();
 const hour = futureDate.getHours();
-const minute = minuteFormat(futureDate.getMinutes());
+const minute = format(futureDate.getMinutes());
 const month = months[futureDate.getMonth()];
 const weekday = weekdays[futureDate.getDay()];
 const day = futureDate.getDate();
 
 giveaway.textContent = `Giveaway ends on ${year}, ${weekday} ${day} ${month}, ${hour}:${minute}`
 
-function minuteFormat(minute) {
-    if (minute < 10) {
-        return minute = `0${minute}`
-    }
-    return minute
-}
+
 // future time in ms
 const futureTime = futureDate.getTime();
 
@@ -70,13 +65,6 @@ function getRemainingTime() {
 
     const values = [days, hours, minutes, seconds];
 
-    function format(item) {
-        if (item < 10) {
-            return item = `0${item}`
-        }
-        return item
-    }
-
     items.forEach(function (item, index) {
         item.innerHTML = format(values[index]);
     })
@@ -86,6 +74,14 @@ function getRemainingTime() {
     }
 
 }
+
+function format(item) {
+    if (item < 10) {
+        return item = `0${item}`
+    }
+    return item
+}
+
 // countdown
 let countdown = setInterval(getRemainingTime, 1000);
 getRemainingTime();
