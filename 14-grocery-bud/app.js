@@ -28,7 +28,7 @@ function addItem(e) {
     const value = grocery.value;
     const id = new Date().getTime().toString();
 
-    if (value !== "" && !editFlag) {
+    if (value && !editFlag) {
         const element = document.createElement("article");
         let attr = document.createAttribute("data-id");
         attr.value = id;
@@ -62,7 +62,7 @@ function addItem(e) {
         addToLocalStorage(id, value);
         // set back to default
         setBackToDefault();
-    } else if (value !== "" && editFlag) {
+    } else if (value && editFlag) {
         editElement.innerHTML = value;
         displayAlert("value changed", "success");
 
@@ -87,7 +87,7 @@ function displayAlert(text, action) {
 // clear items
 function clearItems() {
     const items = document.querySelectorAll(".grocery-item");
-    if (items.length > 0) {
+    if (items.length) {
         items.forEach(function (item) {
             list.removeChild(item);
         });
@@ -181,7 +181,7 @@ function editLocalStorage(id, value) {
 function setupItems() {
     let items = getLocalStorage();
 
-    if (items.length > 0) {
+    if (items.length) {
         items.forEach(function (item) {
             createListItem(item.id, item.value);
         });
