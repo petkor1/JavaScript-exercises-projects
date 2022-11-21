@@ -14,6 +14,7 @@ function Gallery(element) {
   // target
   this.modal = getElement('.modal');
   this.modalImg = getElement('.main-img');
+  this.imageName = getElement('.image-name');
   this.modal = getElement('.modal');
   this.modalImages = getElement('.modal-images');
   this.closeBtn = getElement('.close-btn')
@@ -21,17 +22,24 @@ function Gallery(element) {
   this.prevBtn = getElement('.prev-btn')
   // bind function
   // this.openModal = this.openModal.bind(this);
-  this.container.addEventListener('click', function () {
-    console.log(this);
-    this.openModal;
+  this.container.addEventListener('click', function (e) {
+    if (e.target.classList.contains('img')) {
+      this.openModal(e.target, this.list);
+    }
 
   }.bind(this));
 }
 
-Gallery.prototype.openModal = function () {
-  // console.log(this);
-  // console.log('open modal');
+Gallery.prototype.openModal = function (selectedImage, list) {
+  this.setMainImage(selectedImage);
+  this.modalImages.innerHTML = list.map(function (image) {
+    return `<img src="${image.src}" title="${image.title}" alt="${image.title}" class="${selectedImage.dataset.id === image.dataset.id ? "modal-img selected" : "modal-img"}" data-id="${image.dataset.id}">`
+  }).join('');
   this.modal.classList.add('open')
+}
+Gallery.prototype.setMainImage = function (selectedImage) {
+  this.modalImg.src = selectedImage.src;
+  this.imageName.textContent = selectedImage.title;
 }
 
 const nature = new Gallery(getElement('.nature'))
