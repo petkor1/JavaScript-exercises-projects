@@ -1,9 +1,15 @@
 import getEl from "./utils/getElement.js";
-const URL = 'https://randomuser.me/api/';
+import getUser from "./utils/fetchUser.js";
+import displayUser from "./utils/displayUser.js";
 
-const userImg = getEl('.user-img')
-const title = getEl('.user-title')
-const value = getEl('.user-value')
 const btn = getEl('.btn')
-const btns = [...document.querySelectorAll('.icon')]
 
+const showUSer = async () => {
+    // get user fro api 
+    const person = await getUser();
+    // display user
+    displayUser(person);
+}
+
+window.addEventListener('DOMContentLoaded', showUSer);
+btn.addEventListener('click', showUSer)
