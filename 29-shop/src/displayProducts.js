@@ -1,10 +1,10 @@
 import { formatPrice } from './utils.js';
 import { addToCart } from './cart/setupCart.js';
-const display = (products, element) => {
-    // display product
-    element.innerHTML = products.map(product => {
-        const { id, name, image, price } = product;
-        return `<article class="product">
+const display = (products, element, filters) => {
+  // display product
+  element.innerHTML = products.map(product => {
+    const { id, name, image, price } = product;
+    return `<article class="product">
         <div class="product-container">
           <img src="${image}" alt="${name}" class="product-img img">
           <div class="product-icons">
@@ -21,13 +21,14 @@ const display = (products, element) => {
           <h4 class="product-price">${formatPrice(price)}</h4>
         </footer>
       </article>`
-    }).join('');
-    element.addEventListener('click', function (e) {
-        const parent = e.target.parentElement
-        if (parent.classList.contains('product-cart-btn')) {
-            addToCart(parent.dataset.id);
-        }
-    })
+  }).join('');
+  if (filters) return;
+  element.addEventListener('click', function (e) {
+    const parent = e.target.parentElement
+    if (parent.classList.contains('product-cart-btn')) {
+      addToCart(parent.dataset.id);
+    }
+  })
 
 };
 
