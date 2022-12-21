@@ -5,9 +5,8 @@ const sidebarOverlay = getElement('.sidebar-overlay');
 const closeBtn = getElement('.sidebar-close');
 
 toggleNav.addEventListener('click', () => {
-    sidebarOverlay.classList.add('show');
-})
-
+  sidebarOverlay.classList.add('show');
+});
 closeBtn.addEventListener('click', () => {
-    sidebarOverlay.classList.remove('show');
-})
+  sidebarOverlay.classList.remove('show');
+});

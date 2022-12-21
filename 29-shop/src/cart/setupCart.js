@@ -30,7 +30,7 @@ export const addToCart = (id) => {
     // update values
     const amount = increaseAmount(id);
     const items = [...cartItemsDOM.querySelectorAll('.cart-item-amount')];
-    const newAmount = items.find(value => value.dataset.id === id);
+    const newAmount = items.find((value) => value.dataset.id === id);
     newAmount.textContent = amount;
   }
   // add one to the item count
@@ -60,32 +60,32 @@ function displayCartItemsDOM() {
     addToCartDOM(cartItem);
   });
 }
-
 function removeItem(id) {
-  cart = cart.filter(cartItem => cartItem.id !== id)
-};
-
+  cart = cart.filter((cartItem) => cartItem.id !== id);
+}
 function increaseAmount(id) {
   let newAmount;
   cart = cart.map((cartItem) => {
     if (cartItem.id === id) {
-      newAmount = cartItem.amount + 1
-      cartItem = { ...cartItem, amount: newAmount }
-    } return cartItem;
+      newAmount = cartItem.amount + 1;
+      cartItem = { ...cartItem, amount: newAmount };
+    }
+    return cartItem;
   });
   return newAmount;
 }
-
 function decreaseAmount(id) {
   let newAmount;
   cart = cart.map((cartItem) => {
     if (cartItem.id === id) {
-      newAmount = cartItem.amount - 1
-      cartItem = { ...cartItem, amount: newAmount }
-    } return cartItem;
+      newAmount = cartItem.amount - 1;
+      cartItem = { ...cartItem, amount: newAmount };
+    }
+    return cartItem;
   });
   return newAmount;
 }
+
 function setupCartFunctionality() {
   cartItemsDOM.addEventListener('click', function (e) {
     const element = e.target;
@@ -98,16 +98,17 @@ function setupCartFunctionality() {
       // parent.parentElement.remove();
       element.parentElement.parentElement.remove();
     }
+    // increase
     if (parent.classList.contains('cart-item-increase-btn')) {
       const newAmount = increaseAmount(parentID);
-      parent.nextElementSibling.textContent = newAmount
+      parent.nextElementSibling.textContent = newAmount;
     }
-
+    // decrease
     if (parent.classList.contains('cart-item-decrease-btn')) {
       const newAmount = decreaseAmount(parentID);
       if (newAmount === 0) {
-        removeItem(parentID)
-        parent.parentElement.parentElement.remove()
+        removeItem(parentID);
+        parent.parentElement.parentElement.remove();
       } else {
         parent.previousElementSibling.textContent = newAmount;
       }
@@ -115,7 +116,6 @@ function setupCartFunctionality() {
     displayCartItemCount();
     displayCartTotal();
     setStorageItem('cart', cart);
-
   });
 }
 const init = () => {
@@ -128,5 +128,4 @@ const init = () => {
   // setup cart functionality
   setupCartFunctionality();
 };
-
 init();
